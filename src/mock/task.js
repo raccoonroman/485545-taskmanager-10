@@ -1,3 +1,5 @@
+import {colors} from './const';
+
 const descriptionItems = [
   `Изучить теорию`,
   `Сделать домашку`,
@@ -17,7 +19,6 @@ const repeatingDays = {
 };
 
 const tags = [`homework`, `theory`, `practice`, `intensive`, `keks`];
-const colors = [`black`, `yellow`, `blue`, `green`, `pink`];
 
 const getRandomBooleanValue = () => Math.random() > 0.5;
 
