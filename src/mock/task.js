@@ -1,4 +1,4 @@
-import {colors} from './const';
+import {colors} from './../const';
 
 const descriptionItems = [
   `Изучить теорию`,
@@ -6,6 +6,7 @@ const descriptionItems = [
   `Пройти интенсив на соточку`,
   `Выучить наконец английский`,
   `Пожарить картошку`,
+  `Почистить зубы`,
 ];
 
 const repeatingDays = {
@@ -18,7 +19,7 @@ const repeatingDays = {
   'su': false,
 };
 
-const tags = [`homework`, `theory`, `practice`, `intensive`, `keks`];
+const tags = [`homework`, `theory`, `practice`, `intensive`, `keks`, `beauty`, `madness`, `passion`, `dignity`];
 
 const getRandomBooleanValue = () => Math.random() > 0.5;
 
