@@ -29,6 +29,7 @@ const getRandomIntegerNumber = (min, max) => {
 
 const getRandomArrayItem = (array) => {
   const randomIndex = getRandomIntegerNumber(0, array.length);
+
   return array[randomIndex];
 };
 
@@ -36,7 +37,9 @@ const getRandomDate = () => {
   const targetDate = new Date();
   const sign = getRandomBooleanValue() ? 1 : -1;
   const diffValue = sign * getRandomIntegerNumber(0, 7);
+
   targetDate.setDate(targetDate.getDate() + diffValue);
+
   return targetDate;
 };
 
@@ -49,6 +52,7 @@ const generateTags = (tagsList) => tagsList
 
 const generateTask = () => {
   const dueDate = getRandomBooleanValue() ? null : getRandomDate();
+
   return {
     description: getRandomArrayItem(descriptionItems),
     dueDate,
@@ -62,9 +66,11 @@ const generateTask = () => {
 
 const generateTasks = (count) => {
   const result = [];
+
   for (let i = 0; i < count; i++) {
     result.push(generateTask());
   }
+
   return result;
 };
 

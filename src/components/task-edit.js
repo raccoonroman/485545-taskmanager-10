@@ -31,7 +31,7 @@ const createRepeatingDaysMarkup = (dayNames, repeatingDays) => dayNames
   })
   .join(`\n`);
 
-const createHashtags = (tags) => Array.from(tags)
+const createHashtags = (tags) => [...tags]
   .map((tag) =>
     `<span class="card__hashtag-inner">
       <input
