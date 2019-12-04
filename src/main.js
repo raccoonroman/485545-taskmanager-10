@@ -47,7 +47,6 @@ const boardElement = siteMainElement.querySelector(`.board`);
 const taskListElement = siteMainElement.querySelector(`.board__tasks`);
 
 render(boardElement, new SortingComponent().getElement(), RenderPosition.AFTERBEGIN);
-// render(taskListElement, new TaskEditComponent(tasks[0]).getElement(), RenderPosition.BEFOREEND);
 
 let showingTasksCount = SHOWING_TASKS_COUNT_ON_START;
 
@@ -72,5 +71,3 @@ loadMoreButton.addEventListener(`click`, () => {
     loadMoreButton.remove();
   }
 });
-
-// render(taskListElement, new TaskComponent(task).getElement(), RenderPosition.BEFOREEND)
