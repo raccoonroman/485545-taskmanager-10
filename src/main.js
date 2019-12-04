@@ -9,9 +9,29 @@ import {generateFilters} from './mock/filter';
 import {generateTasks} from './mock/task';
 import {RenderPosition, render} from './utils.js';
 
+
 const TASK_COUNT = 22;
 const SHOWING_TASKS_COUNT_ON_START = 8;
 const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
+
+
+const renderTask = (task) => {
+  const taskComponent = new TaskComponent(task);
+  const taskEditComponent = new TaskEditComponent(task);
+
+  const editButton = taskComponent.getElement().querySelector(`.card__btn--edit`);
+  editButton.addEventListener(`click`, () => {
+    taskListElement.replaceChild(taskEditComponent.getElement(), taskComponent.getElement());
+  });
+
+  const editForm = taskEditComponent.getElement().querySelector(`form`);
+  editForm.addEventListener(`submit`, () => {
+    taskListElement.replaceChild(taskComponent.getElement(), taskEditComponent.getElement());
+  });
+
+  render(taskListElement, taskComponent.getElement(), RenderPosition.BEFOREEND);
+};
+
 
 const filters = generateFilters();
 const tasks = generateTasks(TASK_COUNT);
@@ -27,13 +47,13 @@ const boardElement = siteMainElement.querySelector(`.board`);
 const taskListElement = siteMainElement.querySelector(`.board__tasks`);
 
 render(boardElement, new SortingComponent().getElement(), RenderPosition.AFTERBEGIN);
-render(taskListElement, new TaskEditComponent(tasks[0]).getElement(), RenderPosition.BEFOREEND);
+// render(taskListElement, new TaskEditComponent(tasks[0]).getElement(), RenderPosition.BEFOREEND);
 
 let showingTasksCount = SHOWING_TASKS_COUNT_ON_START;
 
 tasks
-  .slice(1, showingTasksCount)
-  .forEach((task) => render(taskListElement, new TaskComponent(task).getElement(), RenderPosition.BEFOREEND));
+  .slice(0, showingTasksCount)
+  .forEach((task) => renderTask(task));
 
 render(boardElement, new LoadMoreButtonComponent().getElement(), RenderPosition.BEFOREEND);
 
@@ -46,9 +66,11 @@ loadMoreButton.addEventListener(`click`, () => {
 
   tasks
     .slice(prevTasksCount, showingTasksCount)
-    .forEach((task) => render(taskListElement, new TaskComponent(task).getElement(), RenderPosition.BEFOREEND));
+    .forEach((task) => renderTask(task));
 
   if (showingTasksCount >= tasks.length) {
     loadMoreButton.remove();
   }
 });
+
+// render(taskListElement, new TaskComponent(task).getElement(), RenderPosition.BEFOREEND)
