@@ -2,6 +2,7 @@ import SiteMenuComponent from './components/site-menu';
 import FilterComponent from './components/filter';
 import BoardComponent from './components/board';
 import SortingComponent from './components/sorting';
+import TasksComponent from './components/tasks';
 import TaskEditComponent from './components/task-edit';
 import TaskComponent from './components/task';
 import LoadMoreButtonComponent from './components/load-more-button';
@@ -61,19 +62,20 @@ render(siteMainElement, new FilterComponent(filters).getElement(), RenderPositio
 render(siteMainElement, new BoardComponent().getElement(), RenderPosition.BEFOREEND);
 
 const boardElement = siteMainElement.querySelector(`.board`);
-const taskListElement = siteMainElement.querySelector(`.board__tasks`);
 
-render(boardElement, new SortingComponent().getElement(), RenderPosition.AFTERBEGIN);
+render(boardElement, new SortingComponent().getElement(), RenderPosition.BEFOREEND);
+render(boardElement, new TasksComponent().getElement(), RenderPosition.BEFOREEND);
+render(boardElement, new LoadMoreButtonComponent().getElement(), RenderPosition.BEFOREEND);
+
+const taskListElement = siteMainElement.querySelector(`.board__tasks`);
+const loadMoreButton = boardElement.querySelector(`.load-more`);
+
 
 let showingTasksCount = SHOWING_TASKS_COUNT_ON_START;
 
 tasks
   .slice(0, showingTasksCount)
   .forEach((task) => renderTask(task));
-
-render(boardElement, new LoadMoreButtonComponent().getElement(), RenderPosition.BEFOREEND);
-
-const loadMoreButton = boardElement.querySelector(`.load-more`);
 
 
 loadMoreButton.addEventListener(`click`, () => {
