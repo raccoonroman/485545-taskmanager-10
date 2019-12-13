@@ -1,4 +1,5 @@
 import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
 import AbstractSmartComponent from './abstract-smart-component';
 import {colors, days} from '../const';
 import {formatTime, formatDate} from '../utils/common';
@@ -197,8 +198,6 @@ export default class TaskEdit extends AbstractSmartComponent {
 
   _applyFlatpickr() {
     if (this._flatpickr) {
-      // При своем создании `flatpickr` дополнительно создает вспомогательные DOM-элементы.
-      // Что бы их удалять, нужно вызывать метод `destroy` у созданного инстанса `flatpickr`.
       this._flatpickr.destroy();
       this._flatpickr = null;
     }
