@@ -5,6 +5,7 @@ import NoTasksComponent from '../components/no-tasks';
 import {render, remove, RenderPosition} from '../utils/render';
 import TaskController from './task';
 
+
 const SHOWING_TASKS_COUNT_ON_START = 8;
 const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
 
@@ -16,6 +17,7 @@ const renderTasks = (taskListElement, tasks, onDataChange, onViewChange) => {
     return taskController;
   });
 };
+
 
 export default class BoardController {
   constructor(container) {
