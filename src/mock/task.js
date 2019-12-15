@@ -1,5 +1,6 @@
 import {colors} from './../const';
 
+
 const descriptionItems = [
   `Изучить теорию`,
   `Сделать домашку`,

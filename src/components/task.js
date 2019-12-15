@@ -1,6 +1,7 @@
 import AbstractComponent from './abstract-component';
 import {formatTime, formatDate} from '../utils/common';
 
+
 const createHashtagsMarkup = (hashtags) => hashtags
   .map((hashtag) =>
     `<span class="card__hashtag-inner">
@@ -69,6 +70,7 @@ const createTaskTemplate = (task) => {
     </article>`
   );
 };
+
 
 export default class Task extends AbstractComponent {
   constructor(task) {
