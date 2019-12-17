@@ -1,7 +1,7 @@
-import {colors} from './../const';
+import {COLORS} from './../const';
 
 
-const descriptionItems = [
+const DescriptionItems = [
   `Изучить теорию`,
   `Сделать домашку`,
   `Пройти интенсив на соточку`,
@@ -10,7 +10,7 @@ const descriptionItems = [
   `Почистить зубы`,
 ];
 
-const repeatingDays = {
+const DefaultRepeatingDays = {
   'mo': false,
   'tu': false,
   'we': false,
@@ -20,13 +20,17 @@ const repeatingDays = {
   'su': false,
 };
 
-const tags = [`homework`, `theory`, `practice`, `intensive`, `keks`, `beauty`, `madness`, `passion`, `dignity`];
-
-const getRandomBooleanValue = () => Math.random() > 0.5;
-
-const getRandomIntegerNumber = (min, max) => {
-  return min + Math.floor((max - min) * Math.random());
-};
+const Tags = [
+  `homework`,
+  `theory`,
+  `practice`,
+  `intensive`,
+  `keks`,
+  `beauty`,
+  `madness`,
+  `passion`,
+  `dignity`,
+];
 
 const getRandomArrayItem = (array) => {
   const randomIndex = getRandomIntegerNumber(0, array.length);
@@ -34,9 +38,13 @@ const getRandomArrayItem = (array) => {
   return array[randomIndex];
 };
 
+const getRandomIntegerNumber = (min, max) => {
+  return min + Math.floor((max - min) * Math.random());
+};
+
 const getRandomDate = () => {
   const targetDate = new Date();
-  const sign = getRandomBooleanValue() ? 1 : -1;
+  const sign = Math.random() > 0.5 ? 1 : -1;
   const diffValue = sign * getRandomIntegerNumber(0, 7);
 
   targetDate.setDate(targetDate.getDate() + diffValue);
@@ -44,36 +52,37 @@ const getRandomDate = () => {
   return targetDate;
 };
 
-const generateRepeatingDays = () => Object
-  .assign({}, repeatingDays, {'mo': getRandomBooleanValue()});
+const generateRepeatingDays = () => {
+  return Object.assign({}, DefaultRepeatingDays, {
+    'mo': Math.random() > 0.5,
+  });
+};
 
-const generateTags = (tagsList) => tagsList
-  .filter(getRandomBooleanValue)
-  .slice(0, 3);
+const generateTags = (tags) => {
+  return tags
+    .filter(() => Math.random() > 0.5)
+    .slice(0, 3);
+};
 
 const generateTask = () => {
-  const dueDate = getRandomBooleanValue() ? null : getRandomDate();
+  const dueDate = Math.random() > 0.5 ? null : getRandomDate();
 
   return {
     id: String(new Date() + Math.random()),
-    description: getRandomArrayItem(descriptionItems),
+    description: getRandomArrayItem(DescriptionItems),
     dueDate,
-    repeatingDays: dueDate ? repeatingDays : generateRepeatingDays(),
-    tags: new Set(generateTags(tags)),
-    color: getRandomArrayItem(colors),
-    isFavorite: getRandomBooleanValue(),
-    isArchive: getRandomBooleanValue(),
+    repeatingDays: dueDate ? DefaultRepeatingDays : generateRepeatingDays(),
+    tags: new Set(generateTags(Tags)),
+    color: getRandomArrayItem(COLORS),
+    isFavorite: Math.random() > 0.5,
+    isArchive: Math.random() > 0.5,
   };
 };
 
 const generateTasks = (count) => {
-  const result = [];
-
-  for (let i = 0; i < count; i++) {
-    result.push(generateTask());
-  }
-
-  return result;
+  return new Array(count)
+    .fill(``)
+    .map(generateTask);
 };
 
 export {generateTask, generateTasks};
