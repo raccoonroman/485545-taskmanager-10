@@ -25,7 +25,7 @@ const tags = [`homework`, `theory`, `practice`, `intensive`, `keks`, `beauty`, `
 const getRandomBooleanValue = () => Math.random() > 0.5;
 
 const getRandomIntegerNumber = (min, max) => {
-  return min + Math.floor(max * Math.random());
+  return min + Math.floor((max - min) * Math.random());
 };
 
 const getRandomArrayItem = (array) => {
