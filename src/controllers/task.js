@@ -30,22 +30,24 @@ const EmptyTask = {
 };
 
 const parseFormData = (formData) => {
+  const date = formData.get(`date`);
   const repeatingDays = DAYS.reduce((acc, day) => {
     acc[day] = false;
     return acc;
   }, {});
-  const date = formData.get(`date`);
 
-  return {
-    description: formData.get(`text`),
-    color: formData.get(`color`),
-    tags: formData.getAll(`hashtag`),
-    dueDate: date ? new Date(date) : null,
-    repeatingDays: formData.getAll(`repeat`).reduce((acc, it) => {
+  return new TaskModel({
+    'description': formData.get(`text`),
+    'due_date': date ? new Date(date) : null,
+    'tags': formData.getAll(`hashtag`),
+    'repeating_days': formData.getAll(`repeat`).reduce((acc, it) => {
       acc[it] = true;
       return acc;
     }, repeatingDays),
-  };
+    'color': formData.get(`color`),
+    'is_favorite': false,
+    'is_done': false,
+  });
 };
 
 
