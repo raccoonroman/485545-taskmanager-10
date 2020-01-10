@@ -8,7 +8,7 @@ import TasksModel from './models/tasks';
 import {render, RenderPosition} from './utils/render';
 
 
-const AUTHORIZATION = `Basic dbcluckyYXNzd29KRMoj`;
+const AUTHORIZATION = `Basic dbcluckyYXNzd29KRMsj`;
 const END_POINT = `https://htmlacademy-es-10.appspot.com/task-manager`;
 
 
